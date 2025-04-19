@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Calculus Quiz</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 700px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+      background-color: #f9f9f9;
+      color: #333;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+    .progress {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 2rem;
+      font-size: 1.2rem;
+    }
+    .progress .topic {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      cursor: default;
+      user-select: none;
+    }
+    .progress .topic span.icon {
+      font-size: 1.5rem;
+    }
+    section {
+      display: none;
+      background: white;
+      padding: 1rem 1.5rem;
+      border-radius: 8px;
+      box-shadow: 0 0 8px rgba(0,0,0,0.1);
+      margin-bottom: 2rem;
+    }
+    section.active {
+      display: block;
+    }
+    h2 {
+      margin-top: 0;
+      margin-bottom: 1rem;
+    }
+    .question {
+      margin-bottom: 1.5rem;
+    }
+    .question p {
+      margin-bottom: 0.5rem;
+      font-weight: bold;
+    }
+    label {
+      display: block;
+      margin-bottom: 0.3rem;
+      cursor: pointer;
+    }
+    button {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+    .feedback {
+      margin-top: 1rem;
+      font-weight: bold;
+    }
+    .feedback.correct {
+      color: green;
+    }
+    .feedback.incorrect {
+      color: red;
+    }
+    .retry-button {
+      background-color: #dc3545;
+      margin-left: 1rem;
+    }
+    .retry-button:hover {
+      background-color: #a71d2a;
+    }
+  </style>
+</head>
+<body>
+  <h1>Calculus Quiz</h1>
+  <div class="progress" aria-label="Quiz progress">
+    <div class="topic" data-index="0"><span class="icon">🟢</span> Kalkulus Diferensial</div>
+    <div class="topic" data-index="1"><span class="icon">🟢</span> Kalkulus Integral</div>
+    <div class="topic" data-index="2"><span class="icon">🟡</span> Kalkulus Multivariat</div>
+    <div class="topic" data-index="3"><span class="icon">🟡</span> Kalkulus Vektor</div>
+    <div class="topic" data-index="4"><span class="icon">🔴</span> Persamaan Diferensial</div>
+    <div class="topic" data-index="5"><span class="icon">🔴</span> Kalkulus Variasi</div>
+  </div>
+
+  <form id="quiz-form">
+    <!-- Topic 1 -->
+    <section class="active" data-topic-index="0" aria-label="Kalkulus Diferensial">
+      <h2>1. Kalkulus Diferensial</h2>
+      <div class="question" id="q1">
+        <p>Soal 1: Apa tujuan utama dari kalkulus diferensial?</p>
+        <label><input type="radio" name="q1" value="A" /> A. Menghitung total perubahan</label>
+        <label><input type="radio" name="q1" value="B" /> B. Menentukan kecepatan atau laju perubahan</label>
+        <label><input type="radio" name="q1" value="C" /> C. Mengukur luas di bawah kurva</label>
+      </div>
+      <div class="question" id="q2">
+        <p>Soal 2: Turunan dari suatu fungsi pada titik tertentu menunjukkan...</p>
+        <label><input type="radio" name="q2" value="A" /> A. Nilai tertinggi dari fungsi</label>
+        <label><input type="radio" name="q2" value="B" /> B. Jumlah perubahan total</label>
+        <label><input type="radio" name="q2" value="C" /> C. Kemiringan grafik di titik itu</label>
+      </div>
+      <button type="button" class="validate-btn">Validate</button>
+      <button type="button" class="retry-button" style="display:none;">Retry</button>
+      <div class="feedback" aria-live="polite"></div>
+    </section>
+
+    <!-- Topic 2 -->
+    <section data-topic-index="1" aria-label="Kalkulus Integral">
+      <h2>2. Kalkulus Integral</h2>
+      <div class="question" id="q3">
+        <p>Soal 3: Integral tertentu digunakan untuk menghitung...</p>
+        <label><input type="radio" name="q3" value="A" /> A. Arah gerak suatu objek</label>
+        <label><input type="radio" name="q3" value="B" /> B. Perubahan nilai sesaat</label>
+        <label><input type="radio" name="q3" value="C" /> C. Luas di bawah kurva</label>
+      </div>
+      <div class="question" id="q4">
+        <p>Apa hubungan antara integral dan turunan menurut Teorema Fundamental Kalkulus?</p>
+        <label><input type="radio" name="q4" value="A" /> A. Tidak ada hubungan</label>
+        <label><input type="radio" name="q4" value="B" /> B. Integral adalah kebalikan dari turunan</label>
+        <label><input type="radio" name="q4" value="C" /> C. Integral hanya digunakan jika turunan tidak bisa dihitung</label>
+      </div>
+      <button type="button" class="validate-btn">Validate</button>
+      <button type="button" class="retry-button" style="display:none;">Retry</button>
+      <div class="feedback" aria-live="polite"></div>
+    </section>
+
+    <!-- Topic 3 -->
+    <section data-topic-index="2" aria-label="Kalkulus Multivariat">
+      <h2>3. Kalkulus Multivariat</h2>
+      <div class="question" id="q5">
+        <p>Soal 5: Kalkulus multivariat digunakan ketika fungsi memiliki...</p>
+        <label><input type="radio" name="q5" value="A" /> A. Satu variabel saja</label>
+        <label><input type="radio" name="q5" value="B" /> B. Lebih dari satu variabel</label>
+        <label><input type="radio" name="q5" value="C" /> C. Tidak memiliki variabel</label>
+      </div>
+      <div class="question" id="q6">
+        <p>Contoh fungsi multivariat adalah:</p>
+        <label><input type="radio" name="q6" value="A" /> A. f(x) = x²</label>
+        <label><input type="radio" name="q6" value="B" /> B. f(x, y) = x + y</label>
+        <label><input type="radio" name="q6" value="C" /> C. f = 7</label>
+      </div>
+      <button type="button" class="validate-btn">Validate</button>
+      <button type="button" class="retry-button" style="display:none;">Retry</button>
+      <div class="feedback" aria-live="polite"></div>
+    </section>
+
+    <!-- Topic 4 -->
+    <section data-topic-index="3" aria-label="Kalkulus Vektor">
+      <h2>4. Kalkulus Vektor</h2>
+      <div class="question" id="q7">
+        <p>Soal 7: Kalkulus vektor sering digunakan untuk...</p>
+        <label><input type="radio" name="q7" value="A" /> A. Menggambar bentuk-bentuk geometri</label>
+        <label><input type="radio" name="q7" value="B" /> B. Mengukur arah dan besaran dalam medan gaya</label>
+        <label><input type="radio" name="q7" value="C" /> C. Menghitung bilangan bulat</label>
+      </div>
+      <div class="question" id="q8">
+        <p>Vektor memiliki...</p>
+        <label><input type="radio" name="q8" value="A" /> A. Hanya arah</label>
+        <label><input type="radio" name="q8" value="B" /> B. Hanya besar (nilai)</label>
+        <label><input type="radio" name="q8" value="C" /> C. Arah dan besar sekaligus</label>
+      </div>
+      <button type="button" class="validate-btn">Validate</button>
+      <button type="button" class="retry-button" style="display:none;">Retry</button>
+      <div class="feedback" aria-live="polite"></div>
+    </section>
+
+    <!-- Topic 5 -->
+    <section data-topic-index="4" aria-label="Persamaan Diferensial">
+      <h2>5. Persamaan Diferensial</h2>
+      <div class="question" id="q9">
+        <p>Soal 9: Persamaan diferensial mengandung...</p>
+        <label><input type="radio" name="q9" value="A" /> A. Integral tanpa batas</label>
+        <label><input type="radio" name="q9" value="B" /> B. Fungsi dan turunannya</label>
+        <label><input type="radio" name="q9" value="C" /> C. Hanya konstanta</label>
+      </div>
+      <div class="question" id="q10">
+        <p>Contoh penerapan persamaan diferensial dalam dunia nyata adalah...</p>
+        <label><input type="radio" name="q10" value="A" /> A. Menghitung bilangan prima</label>
+        <label><input type="radio" name="q10" value="B" /> B. Menentukan kecepatan suara</label>
+        <label><input type="radio" name="q10" value="C" /> C. Memodelkan pertumbuhan populasi</label>
+      </div>
+      <button type="button" class="validate-btn">Validate</button>
+      <button type="button" class="retry-button" style="display:none;">Retry</button>
+      <div class="feedback" aria-live="polite"></div>
+    </section>
+
+    <!-- Topic 6 -->
+    <section data-topic-index="5" aria-label="Kalkulus Variasi">
+      <h2>6. Kalkulus Variasi (Calculus of Variations)</h2>
+      <div class="question" id="q11">
+        <p>Soal 11: Kalkulus variasi digunakan untuk...</p>
+        <label><input type="radio" name="q11" value="A" /> A. Menghindari penggunaan turunan</label>
+        <label><input type="radio" name="q11" value="B" /> B. Mencari fungsi yang mengoptimalkan sesuatu</label>
+        <label><input type="radio" name="q11" value="C" /> C. Mengganti semua integral dengan vektor</label>
+      </div>
+      <div class="question" id="q12">
+        <p>Contoh masalah kalkulus variasi:</p>
+        <label><input type="radio" name="q12" value="A" /> A. Menentukan akar dari sebuah persamaan</label>
+        <label><input type="radio" name="q12" value="B" /> B. Mencari jalur tercepat antara dua titik</label>
+        <label><input type="radio" name="q12" value="C" /> C. Menjumlahkan deret bilangan</label>
+      </div>
+      <button type="button" class="validate-btn">Validate</button>
+      <button type="button" class="retry-button" style="display:none;">Retry</button>
+      <div class="feedback" aria-live="polite"></div>
+    </section>
+  </form>
+
+  <script>
+    const correctAnswers = {
+      q1: 'B',
+      q2: 'C',
+      q3: 'C',
+      q4: 'B',
+      q5: 'B',
+      q6: 'B',
+      q7: 'B',
+      q8: 'C',
+      q9: 'B',
+      q10: 'C',
+      q11: 'B',
+      q12: 'B'
+    };
+
+    const progressIcons = ['🟢', '🟢', '🟡', '🟡', '🔴', '🔴'];
+
+    const sections = document.querySelectorAll('section');
+    const progressTopics = document.querySelectorAll('.progress .topic');
+
+    function updateProgressIcon(index, status) {
+      // status: 'correct', 'current', 'incorrect'
+      let icon = '';
+      if (status === 'correct') icon = '🟢';
+      else if (status === 'current') icon = '🟡';
+      else if (status === 'incorrect') icon = '🔴';
+      progressTopics[index].querySelector('.icon').textContent = icon;
+    }
+
+    function validateSection(section) {
+      const topicIndex = parseInt(section.dataset.topicIndex);
+      const feedbackEl = section.querySelector('.feedback');
+      const retryBtn = section.querySelector('.retry-button');
+      const validateBtn = section.querySelector('.validate-btn');
+
+      // Get question names in this section
+      const inputs = section.querySelectorAll('input[type="radio"]:checked');
+      if (inputs.length < 2) {
+        feedbackEl.textContent = 'Please answer all questions.';
+        feedbackEl.className = 'feedback incorrect';
+        return false;
+      }
+
+      let allCorrect = true;
+      inputs.forEach(input => {
+        if (correctAnswers[input.name] !== input.value) {
+          allCorrect = false;
+        }
+      });
+
+      if (allCorrect) {
+        feedbackEl.textContent = 'Correct! You may proceed to the next topic.';
+        feedbackEl.className = 'feedback correct';
+        retryBtn.style.display = 'none';
+        validateBtn.style.display = 'none';
+
+        // Show next section if exists
+        if (topicIndex + 1 < sections.length) {
+          sections[topicIndex + 1].classList.add('active');
+          updateProgressIcon(topicIndex, 'correct');
+          updateProgressIcon(topicIndex + 1, 'current');
+        } else {
+          updateProgressIcon(topicIndex, 'correct');
+        }
+        return true;
+      } else {
+        feedbackEl.textContent = 'At least one answer is incorrect. Please try again.';
+        feedbackEl.className = 'feedback incorrect';
+        retryBtn.style.display = 'inline-block';
+        validateBtn.style.display = 'none';
+        updateProgressIcon(topicIndex, 'incorrect');
+        return false;
+      }
+    }
+
+    function resetSection(section) {
+      const feedbackEl = section.querySelector('.feedback');
+      const retryBtn = section.querySelector('.retry-button');
+      const validateBtn = section.querySelector('.validate-btn');
+
+      // Clear selected answers
+      const inputs = section.querySelectorAll('input[type="radio"]');
+      inputs.forEach(input => input.checked = false);
+
+      feedbackEl.textContent = '';
+      feedbackEl.className = 'feedback';
+      retryBtn.style.display = 'none';
+      validateBtn.style.display = 'inline-block';
+
+      // Reset progress icon to current or default
+      const topicIndex = parseInt(section.dataset.topicIndex);
+      updateProgressIcon(topicIndex, 'current');
+    }
+
+    document.querySelectorAll('.validate-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const section = e.target.closest('section');
+        validateSection(section);
+      });
+    });
+
+    document.querySelectorAll('.retry-button').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const section = e.target.closest('section');
+        resetSection(section);
+      });
+    });
+
+    // Initialize progress icons: first topic current, others default
+    progressTopics.forEach((topic, i) => {
+      if (i === 0) updateProgressIcon(i, 'current');
+      else {
+        // Use initial icons from markup
+        // No change needed here
+      }
+    });
+  </script>
+</body>
+</html>
